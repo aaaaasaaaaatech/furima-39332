@@ -43,15 +43,9 @@
 
 |Column        |Type       |Options                        |
 |--------------|-----------|-------------------------------|
-|postcode      |string     |null: false                    |
-|prefectures   |string     |null: false                    |
-|municipalities|string     |null: false                    |
-|address       |string     |null: false                    |
-|building      |string     |                               |
-|phone         |string     |null: false                    |
 |user          |references |null: false, foreign_key: true |
 |item          |references |null: false, foreign_key: true |
-|delivers      |references |null: false, foreign_key: true |
+|address       |references |null: false, foreign_key: true |
 
 
 
@@ -63,14 +57,17 @@
 
 ## addresses テーブル
 
-|Column     |Type       |Options                        |
-|-----------|-----------|-------------------------------|
-|area       |string     |null: false, unique: true      |
-|duration   |string     |null: false                    |
-|user       |references |null: false, foreign_key: true |
-|item       |references |null: false, foreign_key: true |
-|price      |references |null: false, foreign_key: true |
-|buy        |references |null: false, foreign_key: true |
+|Column        |Type       |Options                        |
+|--------------|-----------|-------------------------------|
+|postcode      |string     |null: false                    |
+|prefectures   |string     |null: false                    |
+|municipalities|string     |null: false                    |
+|address       |string     |null: false                    |
+|building      |string     |                               |
+|phone         |string     |null: false                    |
+|user          |references |null: false, foreign_key: true |
+|item          |references |null: false, foreign_key: true |
+|oder          |references |null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
