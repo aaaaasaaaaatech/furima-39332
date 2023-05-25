@@ -6,42 +6,40 @@
 |------------------|-------|-------------------------|
 |nickname          |string |null: false              |
 |email             |string |null: false, unique: true|
-|password          |string |null: false              |
 |encrypted_password|string |null: false              |
 |first_name        |string |null: false              |
 |last_name         |string |null: false              |
 |first_name_kana   |string |null: false              |
 |last_name_kana    |string |null: false              |
-|birth_year        |date   |null: false              |
-|birth_month       |date   |null: false              |
-|birth_day         |date   |null: false              |
+|birthday          |date   |null: false              |
 
 ### Association
 - has_many :items
-- has_many :buys
-- has_many :delivers
+- has_many :orders
+- has_many :addresses
 
 
 ## items テーブル
 |Column      |Type       |Options                        |
 |------------|-----------|-------------------------------|
 |name        |string     |null: false                    |
-|category    |string     |null: false                    |
 |explanation |text       |null: false                    |
+|category    |string     |null: false                    |
 |condition   |string     |null: false                    |
-|price       |string     |null: false                    |
+|charge      |string     |null: false                    |
+|area        |string     |null: false                    |
+|shippingday |string     |null: false                    |
+|price       |integer    |null: false                    |
 |user        |references |null: false, foreign_key: true |
 
 
 
 ### Association
 - belongs_to :user
-- has_many :buys
-- has_many :delivers
+- has_one :order
+- has_many :addresses
 
-
-
-## buys テーブル
+## orders テーブル
 
 |Column        |Type       |Options                        |
 |--------------|-----------|-------------------------------|
@@ -60,10 +58,10 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one:deliver
+- has_one:addresse
 
 
-## delivers テーブル
+## addresses テーブル
 
 |Column     |Type       |Options                        |
 |-----------|-----------|-------------------------------|
@@ -77,4 +75,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :buy
+- belongs_to :order
