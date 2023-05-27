@@ -1,0 +1,17 @@
+=> [32m#<ActiveModel::Errors:0x00005568f0a95b60[0m
+ @base[32m=[0m
+  [32m#<User id: nil, email: "kkk@gmail.com", nickname: "", first_name: nil, last_name: nil, first_name_kana: nil, last_name_kana: nil, birthday: nil, created_at: nil, updated_at: nil>[0m,
+ @details[32m=[0m
+  {[33m:nickname[0m=>[{[33m:error[0m=>[33m:blank[0m}],
+   [33m:first_name[0m=>[{[33m:error[0m=>[33m:blank[0m}],
+   [33m:last_name[0m=>[{[33m:error[0m=>[33m:blank[0m}],
+   [33m:first_name_kana[0m=>[{[33m:error[0m=>[33m:blank[0m}],
+   [33m:last_name_kana[0m=>[{[33m:error[0m=>[33m:blank[0m}],
+   [33m:birthday[0m=>[{[33m:error[0m=>[33m:blank[0m}]},
+ @messages[32m=[0m
+  {[33m:nickname[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m],
+   [33m:first_name[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m],
+   [33m:last_name[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m],
+   [33m:first_name_kana[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m],
+   [33m:last_name_kana[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m],
+   [33m:birthday[0m=>[[31m[1;31m"[0m[31mcan't be blank[1;31m"[0m[31m[0m]}[32m>[0m
