@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @items = Tweet.new
+    @items = Item.new
   end
 
   def move_to_new

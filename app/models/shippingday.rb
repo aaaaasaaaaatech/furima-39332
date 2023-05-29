@@ -1,0 +1,2 @@
+class Shippingday < ApplicationRecord
+end
