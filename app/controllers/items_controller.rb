@@ -2,12 +2,17 @@ class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
 
   def index
-    @items = Item.all
-    end
+    @item = Item.all
+
   end
 
   def new
-    @items = Item.new
+    @item = Item.new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    
   end
 
   def move_to_new
@@ -17,3 +22,4 @@ class ItemsController < ApplicationController
       redirect_to user_session_path
     end
   end
+end
