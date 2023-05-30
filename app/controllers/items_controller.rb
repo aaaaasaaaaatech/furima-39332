@@ -11,8 +11,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :charge_id, :area_id, :shippingday_id, :price, :image)
-    
+    @item = Item.new(item_params)
+    @item.user_id = current_user.id
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def move_to_new
@@ -22,4 +27,10 @@ class ItemsController < ApplicationController
       redirect_to user_session_path
     end
   end
+
+  private
+  def item_params
+    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :charge_id, :area_id, :shippingday_id, :price, :image)
+  end
+
 end
