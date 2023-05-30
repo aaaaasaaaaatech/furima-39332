@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
-
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   def index
     # @item = Item.all
   end
