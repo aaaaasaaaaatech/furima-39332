@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
 
   def index
-    @item = Item.all
+    # @item = Item.all
   end
 
   def new
@@ -11,7 +11,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.user_id = current_user.id
     if @item.save
       redirect_to root_path
     else
@@ -31,6 +30,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :charge_id, :area_id, :shippingday_id, :price,
-                                 :image)
+                                 :image).merge(user_id: current_user.id)
   end
 end
