@@ -157,7 +157,7 @@
                 </div>
               </li>
             <% end %>
-          <% elsif @items.sold_out? %>
+          <% elsif @sold_out_items.any? %>
             <% @items.each do |item| %>
               <li class='list'>
                 <%= image_tag item.image %>
