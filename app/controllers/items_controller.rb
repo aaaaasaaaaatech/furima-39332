@@ -2,7 +2,10 @@ class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   def index
-    # @item = Item.all
+    # binding.pry
+    @items = Item.all
+    charge_id_names= { 2 => '着払い(購入者負担)', 3 => '送料込み(出品者負担)' } 
+    @charge_id_names = charge_id_names
   end
 
   def new
