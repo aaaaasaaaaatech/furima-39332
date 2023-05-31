@@ -127,7 +127,6 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
       <li class='list'>
         <%= link_to "#" do %>
           <div class='item-img-content'>
@@ -138,26 +137,12 @@
           </div>
         <% end %>
         <%# 商品が売れていればsold outを表示しましょう %>
-        <%# if文 % "if @items.present">
-         <%# <% @items.each do |item| %> 
-         <!-- <%= image_tag item.image %>
-                <div class='item-info'>
-                  <h3 class='item-name'>
-                    <%= item.name %>
-                  </h3>
-                  <div class='item-price'>
-                    <span><%= item.price %>円<br><%= @charge_id_names[item.charge_id] %></span>
-                    <div class='star-btn'>
-                      <%= image_tag "star.png", class:"star-icon" %>
-                      <span class='star-count'>0</span> -->
         <%# //商品が売れていればsold outを表示しましょう %>
       </li>
-          
-          
           <% if @items.present? %>
-            <li class='list'>
-              <% @items.each do |item| %>
-                <%= image_tag item.image %>
+           <% @items.reverse_each do |item| %>
+              <li class='list'>
+                <%= image_tag item.image, class: "item-img" %>
                 <div class='item-info'>
                   <h3 class='item-name'>
                     <%= item.name %>
@@ -170,8 +155,25 @@
                     </div>
                   </div>
                 </div>
-              <% end %>
-            </li>
+              </li>
+            <% end %>
+          <% elsif @items.sold_out? %>
+            <% @items.each do |item| %>
+              <li class='list'>
+                <%= image_tag item.image %>
+                <div class='item-info'>
+                  <h3 class='item-name'>
+                    <%= item.name %>
+                  </h3>
+                  <div class='item-price'>
+                    <span><%= item.price %>円<br><%= item.charge_id %></span>
+                    <div class='star-btn'>
+                      <%= image_tag "star.png", class:"star-icon" %>
+                      <span class='star-count'>0</span>
+                    </div>
+                  </div>
+              </li>
+            <% end %>
           <% else %>
             <li class='list'>
               <%= link_to '#' do %>
