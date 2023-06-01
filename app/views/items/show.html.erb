@@ -19,11 +19,11 @@
         \<%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= @charge_id_names[@item.charge_id] %>
+        <%= @item.charge.name %>
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+    
     <%if user_signed_in?%>
       <%if @item.user_id == current_user.id%>
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
@@ -51,23 +51,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @category_id_names[@item.category_id] %></td>
+          <td class="detail-value"><%= @item.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @condition_id_names[@item.condition_id] %></td>
+          <td class="detail-value"><%= @item.condition.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @charge_id_names[@item.charge_id] %></td>
+          <td class="detail-value"><%= @item.charge.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @area_id_names[@item.area_id] %></td>
+          <td class="detail-value"><%= @item.area.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @shippingday_id_names[@item.shippingday_id] %></td>
+          <td class="detail-value"><%= @item.shippingday.name %></td>
         </tr>
       </tbody>
     </table>

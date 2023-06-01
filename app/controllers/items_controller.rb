@@ -23,8 +23,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    charge_id_names= { 2 => '着払い(購入者負担)', 3 => '送料込み(出品者負担)' }
-    @charge_id_names = charge_id_names
     category_id_names = { 2 => 'メンズ', 3 => 'レディース', 4 => 'ベビー・キッズ', 5 => 'インテリア・住まい・小物', 6 => '本・音楽・ゲーム', 7 => 'おもちゃ・ホビー・グッズ', 8 => '家電・スマホ・カメラ', 9 => 'スポーツ・レジャー', 10 => 'ハンドメイド', 11 => 'その他' }
     @category_id_names = category_id_names
     condition_id_names = { 2 => '新品・未使用', 3 => '未使用に近い', 4 => '目立った傷や汚れなし', 5 => 'やや傷や汚れあり', 6 => '傷や汚れあり', 7 => '全体的に状態が悪い' }
