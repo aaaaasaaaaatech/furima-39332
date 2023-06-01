@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     @area_id_names = area_id_names
     shippingday_id_names = {'id' => 'name', 2 => '1〜2日で発送', 3 => '2〜3日で発送', 4 => '4〜7日で発送'}
     @shippingday_id_names =shippingday_id_names
-
+    @username = @item.user.nickname
   end
 
 
