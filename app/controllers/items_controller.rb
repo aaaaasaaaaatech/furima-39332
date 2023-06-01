@@ -21,6 +21,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+    @username = @item.user.nickname
+  end
+
+
   def move_to_new
     if user_signed_in?
       redirect_to user_session_path
