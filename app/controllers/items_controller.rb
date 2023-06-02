@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   
   def index
     @items = Item.all
+    
     # @sold_out_items = calculate_sold_out_items(@items)
   end
 
@@ -22,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @orders = Order.where(item_id: @item.id)
   end
   
   def edit
