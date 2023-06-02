@@ -38,6 +38,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.id == @item.user_id
+      @item.destroy
+    end 
+      redirect_to action: :index
+  end
+
 
   def move_to_new
     if user_signed_in?
