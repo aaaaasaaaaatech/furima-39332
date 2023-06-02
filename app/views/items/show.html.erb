@@ -27,6 +27,7 @@
     <%if user_signed_in?%>
       <%if @item.user_id == current_user.id%>
         <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
       <% else %>
@@ -34,12 +35,12 @@
       <% end %>
     <% end %>
 
+
     <%# 商品が売れていない場合は表示､sold out出す %>
     <!-- <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%> -->
     <%# 商品が売れていない場合は表示､sold out出す %>
 
 
-    
     <div class="item-explain-box">
       <span><%= @item.explanation %></span>
     </div>
@@ -107,3 +108,7 @@
     </a>
   </div>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>
+
