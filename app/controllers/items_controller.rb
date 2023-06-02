@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
-  before_action :authenticate_user!, :set_item, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :destroy]
   def index
     @items = Item.all
     # @sold_out_items = calculate_sold_out_items(@items)
@@ -20,19 +21,15 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    @username = @item.user.nickname
   end
-
+  
   def edit
-    @item = Item.find(params[:id])
-    return if user_signed_in? && current_user.id == @item.user_id
-
-    redirect_to action: :index
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to action: :index
+    end
   end
 
-  def update
-    @item = Item.find(params[:id])
+  def updat
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
