@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  before_action :set_item, only: [:show, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  
   def index
     @items = Item.all
     # @sold_out_items = calculate_sold_out_items(@items)
@@ -29,7 +30,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def updat
+  def update
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
