@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
-  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, :set_item, only: [:new, :edit, :destroy]
   def index
     @items = Item.all
     # @sold_out_items = calculate_sold_out_items(@items)
@@ -53,6 +53,10 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :charge_id, :area_id, :shippingday_id, :price,
                                  :image).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
   # def calculate_sold_out_items(items)
