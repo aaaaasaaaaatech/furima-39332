@@ -2,11 +2,10 @@ class ItemsController < ApplicationController
   # before_action :move_to_new, except: [:new]
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  
+
+
   def index
     @items = Item.all
-    
-    # @sold_out_items = calculate_sold_out_items(@items)
   end
 
   def new
@@ -27,9 +26,10 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    unless current_user.id == @item.user_id
+    if @item.order.present? || (current_user.present? && current_user.id != @item.user_id)
       redirect_to action: :index
     end
+
   end
 
   def update
@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
       @item.destroy
     end 
       redirect_to action: :index
-  end
+  end 
 
 
   def move_to_new
@@ -67,7 +67,5 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  # def calculate_sold_out_items(items)
-  #   items.select { |item| item.sold_out? }
-  # end
+  
 end
