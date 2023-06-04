@@ -77,25 +77,25 @@ RSpec.describe OrderAddress, type: :model do
       it 'phoneは半角数でのみでないと購入できない' do
         @order_address.phone = '１２３４５６７８９０'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is too short')
+        expect(@order_address.errors.full_messages).to include('Phone  number is invalid. Input only number')
       end
 
       it 'phoneはハイフンが入ると購入できない' do
         @order_address.phone = '090-1236-4567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is too short')
+        expect(@order_address.errors.full_messages).to include('Phone  number is invalid. Input only number')
       end
 
       it 'userが紐付いていなければ購入できない' do
         @order_address.user_id = nil
         @order_address.valid?
-        
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
 
       it 'itemが紐付いていなければ購入できない' do
         @order_address.item_id = nil
         @order_address.valid?
-        
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
 
       it 'tokenが空では購入できない' do
