@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @order_address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id)
   end
 
   describe '購入機能テスト' do
     context '購入できる場合' do
-      it 'postcode､area_id､municipalities､address､building､phone,number-form,expiry-form,cvc-form(トークンが生成されていれば)が存在すれば購入できる' do
+      it 'postcode､area_id､municipalities､address､building､phone,number-form,expiry-form,cvc-formが存在すれば購入できる' do
         expect(@order_address).to be_valid
       end
 
@@ -24,14 +26,8 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Postcode can't be blank")
       end
 
-      it 'postcodeが空では購入できない' do
-        @order_address.postcode = nil
-        @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postcode can't be blank")
-      end
-
-      it 'area_idが空では購入できない' do
-        @order_address.area_id = nil
+      it 'area_idが---では購入できない' do
+        @order_address.area_id = '1'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Area can't be blank")
       end
@@ -66,8 +62,14 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Postcode is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
-      it 'phoneは10桁以上11桁以内でないと購入できない' do
+      it 'phoneは9桁以下では購入できない' do
         @order_address.phone = '123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is too short')
+      end
+
+      it 'phoneは12桁以上では購入できない' do
+        @order_address.phone = '123456789012'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is too short')
       end
@@ -82,6 +84,24 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone = '090-1236-4567'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is too short')
+      end
+
+      it 'userが紐付いていなければ購入できない' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        
+      end
+
+      it 'itemが紐付いていなければ購入できない' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        
+      end
+
+      it 'tokenが空では購入できない' do
+        @order_address.token = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end

@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  include ActiveModel::Model
-  attr_accessor :item, :user
 
   before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:index, :create]

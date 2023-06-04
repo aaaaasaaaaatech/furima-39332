@@ -1,4 +1,3 @@
-class AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
   end
