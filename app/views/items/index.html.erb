@@ -127,17 +127,21 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>       
-        <%# 売れたらsold outを表示(あとで消す) %>
-            <!-- <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div>
-          </div> -->
+
+         
+          
           <% if @items.present? %>
            <% @items.reverse_each do |item| %>
               <li class='list'>
                 <%= link_to item_path(item.id) do %>
-
+                <div class='item-img-content'>
                   <%= image_tag item.image, class: "item-img" %>
+                  <%if item.order.present? %>
+                        <div class='sold-out'>
+                          <span>Sold Out!!</span>
+                        </div>
+                  <%end%>
+                   </div>
                     <div class='item-info'>
                       <h3 class='item-name'>
                         <%= item.name %>
