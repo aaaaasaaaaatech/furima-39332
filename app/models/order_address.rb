@@ -1,12 +1,14 @@
 class OrderAddress
   include ActiveModel::Model
   attr_accessor :postcode, :area_id, :municipalities, :address, :building, :phone, :order_id, :user_id, :item_id
+  attr_accessor :token
   
   with_options presence: true do
     validates :area_id, :municipalities, :address 
     validates :postcode, format: { with: /\A\d{3}-\d{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)" }
     validates :phone, format: { with: /\A\d{10,11}\z/, message: "number is too short" }
     validates :phone, numericality: { only_integer: true, message: " number is invalid. Input only number" }
+    validates :token, presence: true
   end
 
   def save
