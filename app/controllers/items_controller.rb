@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @items = Item.all
   end
@@ -24,12 +23,11 @@ class ItemsController < ApplicationController
   def show
     @orders = Order.where(item_id: @item.id)
   end
-  
-  def edit
-    if @item.order.present? || (current_user.present? && current_user.id != @item.user_id)
-      redirect_to action: :index
-    end
 
+  def edit
+    return unless @item.order.present? || (current_user.present? && current_user.id != @item.user_id)
+
+    redirect_to action: :index
   end
 
   def update
@@ -41,12 +39,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user_id
-      @item.destroy
-    end 
-      redirect_to action: :index
-  end 
-
+    @item.destroy if current_user.id == @item.user_id
+    redirect_to action: :index
+  end
 
   def move_to_new
     if user_signed_in?
@@ -66,6 +61,4 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-
-  
 end
