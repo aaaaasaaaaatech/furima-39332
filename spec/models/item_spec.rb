@@ -71,7 +71,6 @@ RSpec.describe Item, type: :model do
       it 'priceは全角では出品できない' do
         @item.price = '０１２３４５６７８９'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include('Price Half-width number')
       end
       # 価格は300未満では出品できない
